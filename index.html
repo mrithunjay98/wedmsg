@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +50,14 @@
         .message {
             font-size: 24px;
             margin-top: 20px;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
         }
 
         .card {
             background: white;
-            width:80%;
+            width: 80%;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -78,98 +80,57 @@
             color: #27ae60;
             font-weight: bold;
         }
-.message {
-    font-size: 24px;
-    margin-top: 20px;
-    width: 80%;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center; /* or left, based on your preference */
-}
-
     </style>
 </head>
 <body>
     <a href="about.html" target="_blank">Go to About Page</a>
     <h3>Enter Your Name</h3>
-    <form method="post" action="">
-        <input type="text" name="name" placeholder="Type your name" required>
+    <form id="nameForm">
+        <input type="text" id="nameInput" placeholder="Type your name" required>
         <button type="submit">Submit</button>
     </form>
 
-   <%
-    String name = request.getParameter("name");
-    if (name != null && !name.trim().isEmpty()) {  // check for null and empty after trimming
-        name = name.trim(); // trim whitespace before use
+    <div id="output"></div>
 
-        if (name.toLowerCase().startsWith("p") && name.toLowerCase().endsWith("a")) {
-%>
-            <div class="message" style="color: #27ae60;">
-                Kya kr rhi ho babu meri ! Love you!
-            </div>
-            <div class="card">
-                <h1>Wedding Invitation</h1>
-                <p class="details">
-                    We are happy to invite you to the wedding of
-                </p>
-                <h2 class="highlight">Mritunjay and Pragya</h2>
-                <p class="details">
-                    Date: <b>6th June</b><br>
-                    Venue: <b>Rohua Marriage Hall</b><br>
-                    Location: <b>Muzaffarpur, Bihar</b>
-                </p>
-                <p class="details">
-                    Please join us to celebrate this special day.
-                </p>
-            </div>
-<%
-        } else if (name.toLowerCase().startsWith("n")) {
-%>
-            <div class="message" style="color: #2980b9;">
-                Hello, <%= name %>! You are amazing too! My cute saali ji 
-            </div>
-            <div class="card">
-                <h1>Wedding Invitation</h1>
-                <p class="details">
-                    We are happy to invite you to the wedding of
-                </p>
-                <h2 class="highlight">Mritunjay and Pragya</h2>
-                <p class="details">
-                    Date: <b>6th June</b><br>
-                    Venue: <b>Rohua Marriage Hall</b><br>
-                    Location: <b>Muzaffarpur, Bihar</b>
-                </p>
-                <p class="details">
-                    Please join us to celebrate this special day.
-                </p>
-            </div>
-<%
-        } else {
-%>
-            <div class="message" style="color: #2980b9;">
-                Hello, <%= name %>! You are amazing too!
-            </div>
-            <div class="card">
-                <h1>Wedding Invitation</h1>
-                <p class="details">
-                    We are happy to invite you to the Wedding of
-                </p>
-                <h2 class="highlight">Mritunjay and Pragya</h2>
-                <p class="details">
-                    Date: <b>6th June</b><br>
-                    Venue: <b>Rohua Marriage Hall</b><br>
-                    Location: <b>Muzaffarpur, Bihar</b>
-                </p>
-                <p class="details">
-                    Please join us to celebrate this special day.
-                </p>
-            </div>
-<%
-        }
-    } 
-%>
+    <script>
+        document.getElementById('nameForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // prevent form from refreshing page
+            const name = document.getElementById('nameInput').value.trim();
+            const output = document.getElementById('output');
+            output.innerHTML = '';
 
+            if (name === '') return;
 
+            let message = '';
+            if (name.toLowerCase().startsWith('p') && name.toLowerCase().endsWith('a')) {
+                message = `Kya kr rhi ho babu meri ! Love you!`;
+            } else if (name.toLowerCase().startsWith('n')) {
+                message = `Hello, ${name}! You are amazing too! My cute saali ji`;
+            } else {
+                message = `Hello, ${name}! You are amazing too!`;
+            }
+
+            output.innerHTML = `
+                <div class="message" style="color: ${name.toLowerCase().startsWith('p') && name.toLowerCase().endsWith('a') ? '#27ae60' : '#2980b9'};">
+                    ${message}
+                </div>
+                <div class="card">
+                    <h1>Wedding Invitation</h1>
+                    <p class="details">
+                        We are happy to invite you to the wedding of
+                    </p>
+                    <h2 class="highlight">Mritunjay and Pragya</h2>
+                    <p class="details">
+                        Date: <b>6th June</b><br>
+                        Venue: <b>Rohua Marriage Hall</b><br>
+                        Location: <b>Muzaffarpur, Bihar</b>
+                    </p>
+                    <p class="details">
+                        Please join us to celebrate this special day.
+                    </p>
+                </div>
+            `;
+        });
+    </script>
 </body>
 </html>
