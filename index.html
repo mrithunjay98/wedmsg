@@ -55,15 +55,17 @@
             text-align: center;
         }
 
-        .card {
-            background: white;
-            width: 80%;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            margin-top: 30px;
-            text-align: center;
-        }
+    .card {
+    border: 1px solid #ccc;
+    padding: 30px 40px;
+    max-width: 900px;  /* Wider */
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
 
         .card h1 {
             font-size: 28px;
@@ -71,6 +73,7 @@
         }
 
         .details {
+        width:80%;
             font-size: 18px;
             color: #333;
             margin: 10px 0;
@@ -85,52 +88,87 @@
 <body>
     <a href="about.html" target="_blank">Go to About Page</a>
     <h3>Enter Your Name</h3>
-    <form id="nameForm">
-        <input type="text" id="nameInput" placeholder="Type your name" required>
+    <form id="mobile">
+        <input type="text" id="nameInput" placeholder=" 5 digit of u r mobile no" required>
         <button type="submit">Submit</button>
     </form>
 
-    <div id="output"></div>
+    <div id="output" style="color: blue; background-color: #f0f0f0; font-weight: bold;"></div>
 
-    <script>
-        document.getElementById('nameForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // prevent form from refreshing page
-            const name = document.getElementById('nameInput').value.trim();
+
+ <script>
+        document.getElementById('mobile').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const input = document.getElementById('nameInput').value.trim();
             const output = document.getElementById('output');
-            output.innerHTML = '';
+            output.innerHTML = '';  // clear previous content
 
-            if (name === '') return;
-
-            let message = '';
-            if (name.toLowerCase().startsWith('p') && name.toLowerCase().endsWith('a')) {
-                message = `Kya kr rhi ho babu meri ! Love you!`;
-            } else if (name.toLowerCase().startsWith('n')) {
-                message = `Hello, ${name}! You are amazing too! My cute saali ji`;
-            } else {
-                message = `Hello, ${name}! You are amazing too!`;
+            if (!/^\d{5}$/.test(input)) {
+                // show error message directly
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = "Please enter a valid 5-digit number.";
+                errorDiv.style.color = 'red';
+                errorDiv.style.fontWeight = 'bold';
+                output.appendChild(errorDiv);
+                return;
             }
 
-            output.innerHTML = `
-                <div class="message" style="color: ${name.toLowerCase().startsWith('p') && name.toLowerCase().endsWith('a') ? '#27ae60' : '#2980b9'};">
-                    ${message}
-                </div>
-                <div class="card">
-                    <h1>Wedding Invitation</h1>
-                    <p class="details">
-                        We are happy to invite you to the wedding of
-                    </p>
-                    <h2 class="highlight">Mritunjay and Pragya</h2>
-                    <p class="details">
-                        Date: <b>6th June</b><br>
-                        Venue: <b>Rohua Marriage Hall</b><br>
-                        Location: <b>Muzaffarpur, Bihar</b>
-                    </p>
-                    <p class="details">
-                        Please join us to celebrate this special day.
-                    </p>
-                </div>
+            let message = '';
+
+            if (input === '73024') {
+                message = "Hi Pragya, it's you I guess. Love you.";
+            } else if (input === '98352') {
+                message = "Hello sasur ji pranaam, mere saadi m jarur aiye.";
+            } else if (input === '91543') {
+                message = "Kya kr rhi ho babu meri! Love you!";
+            } else if (input === '91234') {
+                message = `Hello, ${input}! You are amazing too! My cute saali ji.`;
+            }else if (input === '84095') {
+                message = `Hello,sujata  you are invited to my wedding`;
+            }
+            else if (input === '91234') {
+                message = `Hello, ${input}! You are amazing too! My cute saali ji.`;
+            }
+            else if (input === '98365') {
+                message = `Hello, ${input}! You are amazing too! My cute saali ji.`;
+            }
+            else if (input === '91234') {
+                message = `Hello, ${input}! You are amazing too! My cute saali ji.`;
+            }
+            else if (input === '91234') {
+                message = `Hello, ${input}! You are amazing too! My cute saali ji.`;
+            }
+            else {
+                message = `Hello, ${input}! You are amazing too!`;
+            }
+
+            // Create message div
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message');
+            msgDiv.textContent = message;
+            output.appendChild(msgDiv);
+
+            // Create invitation card
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('card');
+            cardDiv.innerHTML = `
+                <h1>Wedding Invitation</h1>
+                <p class="details">We are happy to invite you to the wedding of</p>
+                <h2 class="highlight">Mritunjay and Pragya</h2>
+                <p class="details">
+                    Date: <b>6th June</b><br>
+                    Venue: <b>chandra villa Marriage Hall</b><br>
+                    Location: <b>Muzaffarpur, Bihar</b>
+                </p>
+                <p class="details">Please join us to celebrate this special day.</p>
             `;
+            output.appendChild(cardDiv);
         });
     </script>
+</body>
+
+
+
 </body>
 </html>
