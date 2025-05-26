@@ -166,6 +166,75 @@
             output.appendChild(cardDiv);
         });
     </script>
+    <script>
+  // Calculate difference in days between two dates using UTC midnight time
+  function daysBetweenUTC(date1, date2) {
+    const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+    return Math.round((utc2 - utc1) / (1000 * 60 * 60 * 24));
+  }
+
+  function calculateRemainingDays(eventDateStr, eventName, elementId) {
+	  const today = new Date();
+	  const eventDate = new Date(eventDateStr);
+
+	  const diffInDays = daysBetweenUTC(today, eventDate);
+	  const element = document.getElementById(elementId);
+
+	  if (diffInDays > 0) {
+		
+		  const msgDiv = document.createElement('div');
+		  msgDiv.classList.add('message');
+
+		  // Clear any existing content if needed
+		  msgDiv.innerHTML = '';
+
+		  // Create span for number of days with one font style
+		  const daysSpan = document.createElement('span');
+		  daysSpan.textContent = diffInDays;
+		  daysSpan.style.fontFamily = "'Courier New', Courier, monospace";
+		  daysSpan.style.fontWeight = 'bold';
+		  daysSpan.style.color = 'blue';
+		  daysSpan.style.marginRight = '5px';
+
+		  // Create span for the text "days remaining for"
+		  const textSpan = document.createElement('span');
+		  textSpan.textContent = " days remaining for ";
+		  textSpan.style.fontFamily = "'Arial', sans-serif";
+		  textSpan.style.fontStyle = 'italic';
+		  textSpan.style.color = 'gray';
+
+		  // Create span for event name with another font style
+		  const eventSpan = document.createElement('span');
+		  eventSpan.textContent = eventName;
+		  eventSpan.style.fontFamily = "'Georgia', serif";
+		  eventSpan.style.fontWeight = '600';
+		  eventSpan.style.color = 'green';
+
+		  // Append all spans to the message div
+		  msgDiv.appendChild(daysSpan);
+		  msgDiv.appendChild(textSpan);
+		  msgDiv.appendChild(eventSpan);
+
+		  // Append the message div to output container (assuming output is defined)
+		  output.appendChild(msgDiv);
+	    
+	    
+	  } else if (diffInDays === 0) {
+	    element.innerText = `Today is ${eventName}!`;
+	  } else {
+	    // Replace Math.abs() with conditional to get absolute value
+	    const absDiffInDays = diffInDays < 0 ? -diffInDays : diffInDays;
+	    element.innerText = `${eventName} passed ${absDiffInDays} day(s) ago.`;
+	  }
+	}
+
+
+  // Call the function with your event dates
+  calculateRemainingDays("2025-06-01", "Tilak", "tilakCountdown");
+  calculateRemainingDays("2025-06-06", "Wedding", "weddingCountdown");
+</script>
 </body>
 
 
