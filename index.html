@@ -184,7 +184,7 @@
 
 	  if (diffInDays > 0) {
 		
-		  const msgDiv = document.createElement('div');
+				  const msgDiv = document.createElement('div');
 		  msgDiv.classList.add('message');
 
 		  // Clear any existing content if needed
@@ -195,7 +195,7 @@
 		  daysSpan.textContent = diffInDays;
 		  daysSpan.style.fontFamily = "'Courier New', Courier, monospace";
 		  daysSpan.style.fontWeight = 'bold';
-		  daysSpan.style.color = 'blue';
+		  daysSpan.style.color = '#2c94e5';
 		  daysSpan.style.marginRight = '5px';
 
 		  // Create span for the text "days remaining for"
@@ -203,15 +203,14 @@
 		  textSpan.textContent = " days remaining for ";
 		  textSpan.style.fontFamily = "'Arial', sans-serif";
 		  textSpan.style.fontStyle = 'italic';
-		  textSpan.style.color = 'gray';
+		  textSpan.style.color = '#2bdfb9';
 
 		  // Create span for event name with another font style
 		  const eventSpan = document.createElement('span');
 		  eventSpan.textContent = eventName;
 		  eventSpan.style.fontFamily = "'Georgia', serif";
 		  eventSpan.style.fontWeight = '600';
-		  eventSpan.style.color = 'green';
-
+		  eventSpan.style.color = '#e52c94';
 		  // Append all spans to the message div
 		  msgDiv.appendChild(daysSpan);
 		  msgDiv.appendChild(textSpan);
